@@ -137,6 +137,10 @@ body {
 }
 
 @media only screen and (max-width: 600px) {
+  body {
+    background-color: #505050;
+  }
+
   .container .song-info {
     background-color: #000;
     margin: 0 10px;
@@ -154,7 +158,7 @@ body {
     margin-bottom: 0px;
   }
 
-  .container .disk {`
+  .container .disk {
     max-width: 80px;
   }
 
@@ -174,6 +178,7 @@ body {
 
   .container .controls {
     width: 350px;
+    background-color: #292929;
   }
 
   .container .controls #play {

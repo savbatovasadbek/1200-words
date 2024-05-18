@@ -135,3 +135,56 @@ body {
     transform: rotateZ(360deg);
   }
 }
+
+@media only screen and (max-width: 600px) {
+  .container .song-info {
+    background-color: #000;
+    margin: 0 10px;
+    padding: 15px 25px 5px 180px;
+    border-radius: 15px 15px 0 0;
+  }
+
+  .container .song-info .song-name {
+    color: #b9b9b9;
+    font-size: 13px;
+    margin: 3px 0 15px;
+  }
+
+  .container .song-info .artist-name {
+    color: #fff;
+    font-weight: bold;
+    font-size: 13px;
+    margin-bottom: 0px;
+  }
+
+  .container .disk {
+    max-width: 80px;
+  }
+
+  .container .disk .cover {
+    width: 125px;
+    height: 125px;
+    top: 7px;
+    left: 54px;
+  }
+
+  .container .disk .circle {
+    width: 20px;
+    height: 20px;
+    left: 28%;
+    top: 29%;
+  }
+
+  .container .controls {
+    width: 380px;
+  }
+
+  .container .controls #play {
+    background-color: #1db954;
+    color: #fff;
+    padding: 15px 17px 14px 18px;
+    font-size: 28px;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+  }
+}

@@ -1,26 +1,5 @@
-const songList = [
-  {
-    name: "Jazz In Paris",
-    artist: "Media Right Productions",
-    src: "assets/1.mp3",
-    cover: "assets/1.jpg",
-  },
-  {
-    name: "Mue Skies",
-    artist: "Silent Partner",
-    src: "assets/2.mp3",
-    cover: "assets/2.jpg",
-  },
-  {
-    name: "Crimson Fly",
-    artist: "Huma-Huma",
-    src: "assets/3.mp3",
-    cover: "assets/3.jpg",
-  },
-];
+import songList from "./songList.js";
 
-const artistName = document.querySelector(".artist-name");
-const musicName = document.querySelector(".song-name");
 const fillBar = document.querySelector(".fill-bar");
 const time = document.querySelector(".time");
 const cover = document.getElementById("cover");
@@ -28,15 +7,17 @@ const playBtn = document.getElementById("play");
 const prevBtn = document.getElementById("prev");
 const nextBtn = document.getElementById("next");
 const prog = document.querySelector(".progress-bar");
+const showAnswer = document.getElementById("show-answer");
 
 let song = new Audio();
-let currentSong = 0;
+let arr = [];
+let currentSong = randomNumber();
 let playing = false;
 
+// Start main JavaScript
 document.addEventListener("DOMContentLoaded", () => {
   loadSong(currentSong);
   song.addEventListener("timeupdate", updateProgress);
-  //   song.addEventListener("ended", nextSong);
   song.addEventListener("ended", reStart);
   prevBtn.addEventListener("click", prevSong);
   nextBtn.addEventListener("click", nextSong);
@@ -45,11 +26,8 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 function loadSong(index) {
-  const { name, artist, src, cover: thumb } = songList[index];
-  artistName.innerText = artist;
-  musicName.innerText = name;
+  const { src } = songList[index];
   song.src = src;
-  cover.style.backgroundImage = `url(${thumb})`;
 }
 
 function updateProgress() {
@@ -82,12 +60,14 @@ function togglePlayPause() {
 }
 
 function nextSong() {
-  currentSong = (currentSong + 1) % songList.length;
+  showAnswer.innerText = `Answer:`;
+  currentSong = randomNumber();
   playMusic();
 }
 
 function prevSong() {
-  currentSong = (currentSong - 1 + songList.length) % songList.length;
+  let check = arr.indexOf(currentSong);
+  currentSong = check == 0 ? arr[arr.length - 1] : arr[check - 1];
   playMusic();
 }
 
@@ -108,4 +88,22 @@ function playMusic() {
 function seek(e) {
   const pos = (e.offsetX / prog.clientWidth) * song.duration;
   song.currentTime = pos;
+}
+// End main JavaScript
+showAnswer.addEventListener("click", () => {
+  const { name } = songList[currentSong];
+  showAnswer.innerText = `Answer: ${name}`;
+});
+
+function randomNumber() {
+  if (arr.length == songList.length) {
+    arr = [];
+  }
+  let number = Math.floor(Math.random() * songList.length);
+  if (!arr.includes(number)) {
+    arr.push(number);
+  } else {
+    randomNumber();
+  }
+  return number;
 }

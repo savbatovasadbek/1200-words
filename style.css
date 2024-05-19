@@ -26,16 +26,30 @@ body {
   border-radius: 15px 15px 0 0;
 }
 
-.container .song-info .song-name {
-  color: #b9b9b9;
+.container .song-info .answer input {
+  outline: none;
+  padding: 2px 5px;
   font-size: 14px;
-  margin: 3px 0 20px;
+  letter-spacing: 1px;
+  border: 2px solid #505050;
 }
 
-.container .song-info .artist-name {
-  color: #fff;
-  font-weight: bold;
-  font-size: 18px;
+.container .song-info .answer input:focus {
+  border: 2px solid red;
+}
+
+.container .song-info .right_answer {
+  color: #b9b9b9;
+  font-size: 14px;
+}
+
+.container .song-info .right_answer #show-answer {
+  color: #595dde;
+  cursor: pointer;
+}
+
+.container .song-info .right_answer #show-answer:hover {
+  color: #9fa2f3;
 }
 
 .container .song-info .progress-bar {
@@ -71,7 +85,7 @@ body {
   position: absolute;
   top: 10px;
   left: 10px;
-  background: url("./assets/1.jpg");
+  background: url("./assets/qatar.jpg");
   background-repeat: no-repeat;
   background-position: bottom center;
   background-size: cover;
@@ -85,7 +99,7 @@ body {
   position: absolute;
   width: 30px;
   height: 30px;
-  left: 15%;
+  left: 13%;
   top: 29%;
   z-index: 1;
   border-radius: 50%;
@@ -176,12 +190,12 @@ body {
   .container .disk .circle {
     width: 18px;
     height: 18px;
-    left: 22%;
-    top: 29%;
+    left: 21%;
+    top: 27%;
   }
 
   .container .controls {
-    width: 350px;
+    width: 380px;
     background-color: #292929;
   }
 

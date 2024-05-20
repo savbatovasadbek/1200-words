@@ -26,17 +26,34 @@ body {
   border-radius: 15px 15px 0 0;
 }
 
+.container .song-info .answer {
+  position: relative;
+}
+
 .container .song-info .answer input {
   outline: none;
-  padding: 2px 5px;
-  font-size: 14px;
+  padding: 5px 30px 5px 5px;
+  font-size: 15px;
   letter-spacing: 1px;
   border: 2px solid #505050;
 }
 
-.container .song-info .answer input:focus {
-  border: 2px solid red;
+.container .song-info .answer .right {
+  border: 2px solid green;
 }
+
+.container .song-info .answer p {
+  position: absolute;
+  color: green;
+  content: "";
+  top: -12px;
+  right: 5px;
+  display: none;
+}
+
+/* .container .song-info .answer input:focus {
+  border: 2px solid red;
+} */
 
 .container .song-info .right_answer {
   color: #b9b9b9;

@@ -8,15 +8,17 @@ const prevBtn = document.getElementById("prev");
 const nextBtn = document.getElementById("next");
 const prog = document.querySelector(".progress-bar");
 const showAnswer = document.getElementById("show-answer");
+const answer = document.getElementById("answer");
+const rightSign = document.querySelector(".answer p");
 
 let song = new Audio();
-let arr = [];
-let currentSong = randomNumber();
+let arr = randomNumber();
+let currentSong = 0;
 let playing = false;
 
 // Start main JavaScript
 document.addEventListener("DOMContentLoaded", () => {
-  loadSong(currentSong);
+  loadSong(arr[currentSong]);
   song.addEventListener("timeupdate", updateProgress);
   song.addEventListener("ended", reStart);
   prevBtn.addEventListener("click", prevSong);
@@ -60,14 +62,19 @@ function togglePlayPause() {
 }
 
 function nextSong() {
-  showAnswer.innerText = `Answer:`;
-  currentSong = randomNumber();
+  showAnswer.innerText = `Translation:`;
+  currentSong = currentSong == songList.length - 1 ? 0 : ++currentSong;
+  answer.classList.remove("right");
+  rightSign.style.display = `none`;
+  answer.value = "";
   playMusic();
 }
 
 function prevSong() {
-  let check = arr.indexOf(currentSong);
-  currentSong = check == 0 ? arr[arr.length - 1] : arr[check - 1];
+  currentSong = currentSong == 0 ? songList.length - 1 : --currentSong;
+  answer.classList.remove("right");
+  rightSign.style.display = `none`;
+  answer.value = "";
   playMusic();
 }
 
@@ -77,7 +84,7 @@ function reStart() {
 }
 
 function playMusic() {
-  loadSong(currentSong);
+  loadSong(arr[currentSong]);
   song.play();
   playing = true;
   playBtn.classList.add("fa-pause");
@@ -91,19 +98,32 @@ function seek(e) {
 }
 // End main JavaScript
 showAnswer.addEventListener("click", () => {
-  const { name } = songList[currentSong];
-  showAnswer.innerText = `Answer: ${name}`;
+  const { translation } = songList[arr[currentSong]];
+  showAnswer.innerText = `Translation: ${translation}`;
 });
 
 function randomNumber() {
-  if (arr.length == songList.length) {
-    arr = [];
+  let data = [];
+  for (let i = 0; i < songList.length; i++) {
+    let number = Math.floor(Math.random() * songList.length);
+    if (data.includes(number)) {
+      i--;
+    } else {
+      data.push(number);
+    }
   }
-  let number = Math.floor(Math.random() * songList.length);
-  if (!arr.includes(number)) {
-    arr.push(number);
-  } else {
-    randomNumber();
+  return data;
+}
+
+answer.addEventListener("keyup", (e) => {
+  let userAnswer = e.target.value;
+  checkAnswer(userAnswer);
+});
+
+function checkAnswer(word) {
+  const { name } = songList[arr[currentSong]];
+  if (name == word) {
+    answer.classList.add("right");
+    rightSign.style.display = `block`;
   }
-  return number;
 }
